@@ -3,7 +3,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    m_hightlighter(new SqlSyntaxHighlighter(this))
 {
     ui->setupUi(this);
 
@@ -16,6 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->setStyleSheet("background-color: #333; color: #33bb33");
     ui->statusBar->setFont(QFont("Consolas", 14));
     ui->statusBar->showMessage(tr("State: ready 0123456789"));
+
+    m_hightlighter->setDocument(ui->requestPlainTextEdit->document());
+    m_hightlighter->setPattern();
 
     //Router& router = Router::getInstance();
     //ui->label->setText(router.getRepository()->helloString());

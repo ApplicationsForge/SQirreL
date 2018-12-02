@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "models/router.h"
+#include "gui/sql_syntax_highlighter.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    /// Подсветки синтаксиса в редакторе SQL
+    QScopedPointer<SqlSyntaxHighlighter> m_hightlighter;
 };
 
 #endif // MAINWINDOW_H

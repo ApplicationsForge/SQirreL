@@ -29,13 +29,15 @@ SOURCES += \
         gui/mainwindow.cpp \
     models/repository/repository.cpp \
     models/router.cpp \
-    gui/widgets/sql_editor_widget.cpp
+    gui/widgets/sql_editor_widget.cpp \
+    gui/sql_syntax_highlighter.cpp
 
 HEADERS += \
         gui/mainwindow.h \
     models/repository/repository.h \
     models/router.h \
-    gui/widgets/sql_editor_widget.h
+    gui/widgets/sql_editor_widget.h \
+    gui/sql_syntax_highlighter.h
 
 FORMS += \
         gui/mainwindow.ui
