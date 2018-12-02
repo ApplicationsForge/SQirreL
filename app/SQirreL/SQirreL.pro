@@ -30,14 +30,16 @@ SOURCES += \
     models/repository/repository.cpp \
     models/router.cpp \
     gui/widgets/sql_editor_widget.cpp \
-    gui/sql_syntax_highlighter.cpp
+    gui/sql_syntax_highlighter.cpp \
+    libs/json_parser/json.cpp
 
 HEADERS += \
         gui/mainwindow.h \
     models/repository/repository.h \
     models/router.h \
     gui/widgets/sql_editor_widget.h \
-    gui/sql_syntax_highlighter.h
+    gui/sql_syntax_highlighter.h \
+    libs/json_parser/json.h
 
 FORMS += \
         gui/mainwindow.ui
