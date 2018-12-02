@@ -46,7 +46,7 @@
         <number>12</number>
        </property>
        <item>
-        <widget class="QPlainTextEdit" name="plainTextEdit">
+        <widget class="SqlEditorWidget" name="plainTextEdit">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
@@ -177,6 +177,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>SqlEditorWidget</class>
+   <extends>QPlainTextEdit</extends>
+   <header>gui/widgets/sql_editor_widget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         gui/mainwindow.cpp \
     models/repository/repository.cpp \
-    models/router.cpp
+    models/router.cpp \
+    gui/widgets/sql_editor_widget.cpp
 
 HEADERS += \
         gui/mainwindow.h \
     models/repository/repository.h \
-    models/router.h
+    models/router.h \
+    gui/widgets/sql_editor_widget.h
 
 FORMS += \
         gui/mainwindow.ui
