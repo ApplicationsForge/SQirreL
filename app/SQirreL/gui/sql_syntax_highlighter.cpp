@@ -19,7 +19,6 @@ void SqlSyntaxHighlighter::setPattern()
     keywordPattern =
     {
         "SELECT",
-        "FROM",
         "UPDATE",
         "DELETE",
         "INSERT INTO",
@@ -29,15 +28,15 @@ void SqlSyntaxHighlighter::setPattern()
         "ALTER TABLE",
         "DROP TABLE",
         "CREATE INDEX",
-        "DROP INDEX",
-        "LEFT",
-        "RIGHT",
-        "JOIN"
+        "DROP INDEX"
     };
 
     argumentsPattern =
     {
-        "test"
+        "FROM",
+        "LEFT",
+        "RIGHT",
+        "JOIN"
     };
 
     commentsPattern =
