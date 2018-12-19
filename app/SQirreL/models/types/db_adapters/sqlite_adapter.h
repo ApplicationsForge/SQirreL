@@ -3,9 +3,7 @@
 
 #include <QObject>
 #include <QtSql>
-#include <QtDebug>
-#include <QFileInfo>
-#include <QMessageBox>
+#include <QDebug>
 
 class SQLiteAdapter : public QObject
 {
@@ -14,15 +12,9 @@ public:
     explicit SQLiteAdapter(QObject *parent = nullptr);
     ~SQLiteAdapter();
 
-    bool open(QString path);
-    void close();
-    QSqlQuery runSQL(QString request);
-
-    QString dbLocalPath() const;
+    QSqlQuery runSQL(QString dbPath, QString request);
 
 private:
-    QSqlDatabase m_db;
-    QString m_dbLocalPath;
 
 signals:
 

@@ -37,25 +37,14 @@ void Router::resetConnections()
 
 }
 
-bool Router::openDB(QString path, Repository::DB_TYPE type)
+void Router::setDatabase(QString path, Repository::DB_TYPE type)
 {
-    bool result = false;
-    switch (type) {
-    case Repository::DB_TYPE::SQLite:
-    {
-        result = m_repository->openSQLiteDatabase(path);
-        break;
-    }
-    default:
-    {
-        break;
-    }
-    }
-    return result;
+    m_repository->setDatabasePath(path);
+    m_repository->setDatabaseType(type);
 }
 
 QSqlQuery Router::runSQL(QString request)
 {
-    return m_repository->getSQLResult(request);
+    return m_repository->executeSQL(request);
 }
 

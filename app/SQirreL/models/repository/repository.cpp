@@ -1,14 +1,12 @@
 #include "repository.h"
 
 Repository::Repository(QObject *parent) :
-    QObject(parent),
-    m_sqliteAdapter(new SQLiteAdapter(this))
+    QObject(parent)
 {
 }
 
 Repository::~Repository()
 {
-    m_sqliteAdapter->close();
 }
 
 QString Repository::helloString() const
@@ -23,22 +21,39 @@ void Repository::setHelloString(const QString &helloString)
 
 QString Repository::getDBPath()
 {
-    return m_sqliteAdapter->dbLocalPath();
+    return m_databasePath;
 }
 
-bool Repository::openSQLiteDatabase(QString localPath)
+QString Repository::getDatabasePath() const
 {
-    m_currentAdapter = DB_TYPE::SQLite;
-    return m_sqliteAdapter->open(localPath);
+    return m_databasePath;
 }
 
-QSqlQuery Repository::getSQLResult(QString request)
+void Repository::setDatabasePath(const QString &databasePath)
+{
+    m_databasePath = databasePath;
+}
+
+void Repository::setDatabaseType(Repository::DB_TYPE type)
+{
+    m_currentAdapter = type;
+}
+
+QSqlQuery Repository::executeSQL(QString request)
 {
     QSqlQuery result;
     switch (m_currentAdapter) {
     case DB_TYPE::SQLite:
     {
-        result = m_sqliteAdapter->runSQL(request);
+        try
+        {
+            SQLiteAdapter adapter(this);
+            result = adapter.runSQL(m_databasePath, request);
+        }
+        catch(std::runtime_error e)
+        {
+            QMessageBox(QMessageBox::Warning, "Ошибка", e.what()).exec();
+        }
         break;
     }
     default:

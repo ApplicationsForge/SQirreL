@@ -2,63 +2,54 @@
 
 SQLiteAdapter::SQLiteAdapter(QObject *parent) : QObject(parent)
 {
-    m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_dbLocalPath = "";
 }
 
 SQLiteAdapter::~SQLiteAdapter()
 {
-    close();
+
 }
 
-bool SQLiteAdapter::open(QString path)
+QSqlQuery SQLiteAdapter::runSQL(QString dbPath, QString request)
 {
-    bool dbIsOpen = false;
-    m_db.setDatabaseName(path);
-    if(m_db.open())
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(dbPath);
+    if(!db.open())
     {
-        dbIsOpen = true;
-        m_dbLocalPath = path;
-        //emit databaseIsNotOpen();
-        //throw std::runtime_error("database is not connected");
+       throw std::runtime_error("database is not connected");
     }
-    return dbIsOpen;
-    //QSqlQuery query;
-    //qDebug() << query.exec("PRAGMA foreign_keys = ON;");
-}
 
-void SQLiteAdapter::close()
-{
-    m_db.close();
-}
-
-QSqlQuery SQLiteAdapter::runSQL(QString request)
-{
     qDebug() << request;
-    QString tmp = request;
     QSqlQuery query;
-    if(query.prepare(tmp))
+    if(query.prepare(request))
     {
         if(query.exec())
         {
             if(query.lastError().text() != " ")
             {
-                qDebug() << query.lastError().text();
+                //qDebug() << query.lastError().text();
+                throw std::runtime_error(query.lastError().text().toStdString());
             }
         }
         else
         {
-            QMessageBox(QMessageBox::Warning, "Ошибка", "Невозможно выполнить запрос!");
+            throw std::runtime_error("Невозможно выполнить запрос!");
+            //QMessageBox(QMessageBox::Warning, "Ошибка", "Невозможно выполнить запрос!").exec();
         }
     }
     else
     {
-        QMessageBox(QMessageBox::Warning, "Ошибка", "Невозможно подготовить запрос!");
+        throw std::runtime_error("Невозможно подготовить запрос!");
+        //QMessageBox(QMessageBox::Warning, "Ошибка", "Невозможно подготовить запрос!").exec();
     }
-    return query;
-}
 
-QString SQLiteAdapter::dbLocalPath() const
-{
-    return m_dbLocalPath;
+    /*QString qs;
+    {
+        qs.append(QSqlDatabase::database().connectionName());
+    }
+    QSqlDatabase::removeDatabase(qs);*/
+
+    QSqlDatabase::removeDatabase(QSqlDatabase::database().connectionName());
+    qDebug() << "AfterDelete" << QSqlDatabase::database().connectionNames();
+
+    return query;
 }

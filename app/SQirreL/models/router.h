@@ -16,7 +16,7 @@ public:
 
      Repository* getRepository();
 
-     bool openDB(QString path, Repository::DB_TYPE type);
+     void setDatabase(QString path, Repository::DB_TYPE type);
      QSqlQuery runSQL(QString request);
 
 private:

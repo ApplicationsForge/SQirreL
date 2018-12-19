@@ -49,16 +49,8 @@ void MainWindow::on_actionOpenLocalSQLiteDatabase_triggered()
 {
     QString path = QFileDialog::getOpenFileName(nullptr, "Выберите файл базы данных", "", "*.db");
     Router& router = Router::getInstance();
-    if(router.openDB(path, Repository::DB_TYPE::SQLite))
-    {
-        ui->statusBar->setStyleSheet("background-color: #333; color: #33bb33");
-        ui->statusBar->showMessage(tr("SQLite local db is connected"));
-    }
-    else
-    {
-        ui->statusBar->setStyleSheet("background-color: #333; color: #bb3333");
-        ui->statusBar->showMessage(tr("SQLite local db is not connected"));
-    }
+    router.setDatabase(path, Repository::DB_TYPE::SQLite);
+    ui->dbLineEdit->setText(router.getRepository()->getDBPath());
 }
 
 void MainWindow::on_runToolButton_clicked()
@@ -70,11 +62,18 @@ void MainWindow::on_runToolButton_clicked()
     if(response.lastError().text() != " ")
     {
         qDebug() << response.lastError().text();
+        ui->statusBar->setStyleSheet("background-color: #333; color: #bb3333");
+        ui->statusBar->showMessage(tr("SQLite local db is not connected"));
     }
     while (response.next())
     {
+        qDebug() << response.result();
         qDebug() << response.value(0).toString();
+        ui->statusBar->setStyleSheet("background-color: #333; color: #33bb33");
+        ui->statusBar->showMessage(tr("SQLite local db is connected"));
     }
+
+    ui->dbLineEdit->setText(router.getRepository()->getDBPath());
 
     //SELECT * FROM Hen
 }

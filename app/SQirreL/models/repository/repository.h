@@ -2,6 +2,7 @@
 #define REPOSITORY_H
 
 #include <QObject>
+#include <QMessageBox>
 
 #include "models/types/db_adapters/sqlite_adapter.h"
 
@@ -21,14 +22,17 @@ public:
 
     QString getDBPath();
 
+    QString getDatabasePath() const;
+    void setDatabasePath(const QString &databasePath);
+    void setDatabaseType(DB_TYPE type);
+
 private:
     QString m_helloString = "SQirreL";
-    QScopedPointer<SQLiteAdapter> m_sqliteAdapter;
 
     DB_TYPE m_currentAdapter;
+    QString m_databasePath;
 
-    bool openSQLiteDatabase(QString localPath);
-    QSqlQuery getSQLResult(QString request);
+    QSqlQuery executeSQL(QString request);
 
     friend class Router;
 
