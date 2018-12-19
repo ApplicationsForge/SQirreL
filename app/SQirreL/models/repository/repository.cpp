@@ -9,16 +9,6 @@ Repository::~Repository()
 {
 }
 
-QString Repository::helloString() const
-{
-    return m_helloString;
-}
-
-void Repository::setHelloString(const QString &helloString)
-{
-    m_helloString = helloString;
-}
-
 QString Repository::getDBPath()
 {
     return m_databasePath;
@@ -37,29 +27,4 @@ void Repository::setDatabasePath(const QString &databasePath)
 void Repository::setDatabaseType(Repository::DB_TYPE type)
 {
     m_currentAdapter = type;
-}
-
-QList<QSqlRecord> Repository::executeSQL(QString request)
-{
-    QList<QSqlRecord> result;
-    switch (m_currentAdapter) {
-    case DB_TYPE::SQLite:
-    {
-        try
-        {
-            SQLiteAdapter adapter(this);
-            result = adapter.executeSQL(m_databasePath, request);
-        }
-        catch(std::runtime_error e)
-        {
-            QMessageBox(QMessageBox::Warning, "Ошибка", e.what()).exec();
-        }
-        break;
-    }
-    default:
-    {
-        break;
-    }
-    }
-    return result;
 }

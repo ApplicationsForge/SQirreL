@@ -4,8 +4,6 @@
 #include <QObject>
 #include <QMessageBox>
 
-#include "models/types/db_adapters/sqlite_adapter.h"
-
 class Router;
 
 class Repository : public QObject
@@ -17,9 +15,6 @@ public:
 
     enum DB_TYPE { SQLite };
 
-    QString helloString() const;
-    void setHelloString(const QString &helloString);
-
     QString getDBPath();
 
     QString getDatabasePath() const;
@@ -27,12 +22,8 @@ public:
     void setDatabaseType(DB_TYPE type);
 
 private:
-    QString m_helloString = "SQirreL";
-
     DB_TYPE m_currentAdapter;
     QString m_databasePath;
-
-    QList<QSqlRecord> executeSQL(QString request);
 
     friend class Router;
 

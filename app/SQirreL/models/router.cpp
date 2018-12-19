@@ -45,6 +45,26 @@ void Router::setDatabase(QString path, Repository::DB_TYPE type)
 
 QList<QSqlRecord> Router::executeSQL(QString request)
 {
-    return m_repository->executeSQL(request);
+    QList<QSqlRecord> result;
+    switch (m_repository->m_currentAdapter) {
+    case Repository::DB_TYPE::SQLite:
+    {
+        try
+        {
+            SQLiteAdapter adapter(this);
+            result = adapter.executeSQL(m_repository->m_databasePath, request);
+        }
+        catch(std::runtime_error e)
+        {
+            QMessageBox(QMessageBox::Warning, "Ошибка", e.what()).exec();
+        }
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
+    return result;
 }
 

@@ -4,6 +4,7 @@
 #include <QObject>
 
 #include "models/repository/repository.h"
+#include "models/types/db_adapters/sqlite_adapter.h"
 
 // Router& router = Router::getInstance();
 
