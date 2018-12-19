@@ -12,7 +12,7 @@ public:
     explicit SQLiteAdapter(QObject *parent = nullptr);
     ~SQLiteAdapter();
 
-    QSqlQuery runSQL(QString dbPath, QString request);
+    QList<QSqlRecord> executeSQL(QString dbPath, QString request);
 
 private:
 

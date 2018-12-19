@@ -43,7 +43,7 @@ void Router::setDatabase(QString path, Repository::DB_TYPE type)
     m_repository->setDatabaseType(type);
 }
 
-QSqlQuery Router::runSQL(QString request)
+QList<QSqlRecord> Router::executeSQL(QString request)
 {
     return m_repository->executeSQL(request);
 }

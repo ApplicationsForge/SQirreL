@@ -9,7 +9,7 @@ SQLiteAdapter::~SQLiteAdapter()
 
 }
 
-QSqlQuery SQLiteAdapter::runSQL(QString dbPath, QString request)
+QList<QSqlRecord> SQLiteAdapter::executeSQL(QString dbPath, QString request)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(dbPath);
@@ -18,7 +18,9 @@ QSqlQuery SQLiteAdapter::runSQL(QString dbPath, QString request)
        throw std::runtime_error("database is not connected");
     }
 
-    qDebug() << request;
+    qDebug() << "Request" << request;
+    QList<QSqlRecord> response;
+
     QSqlQuery query;
     if(query.prepare(request))
     {
@@ -26,20 +28,25 @@ QSqlQuery SQLiteAdapter::runSQL(QString dbPath, QString request)
         {
             if(query.lastError().text() != " ")
             {
-                //qDebug() << query.lastError().text();
                 throw std::runtime_error(query.lastError().text().toStdString());
+            }
+            while (query.next())
+            {
+                //qDebug() << query.record();
+                response.push_back(query.record());
+                //QString parametr = query.value(0).toString();
+                //qDebug() << parametr;
+                //response.push_back(parametr);
             }
         }
         else
         {
             throw std::runtime_error("Невозможно выполнить запрос!");
-            //QMessageBox(QMessageBox::Warning, "Ошибка", "Невозможно выполнить запрос!").exec();
         }
     }
     else
     {
         throw std::runtime_error("Невозможно подготовить запрос!");
-        //QMessageBox(QMessageBox::Warning, "Ошибка", "Невозможно подготовить запрос!").exec();
     }
 
     /*QString qs;
@@ -51,5 +58,5 @@ QSqlQuery SQLiteAdapter::runSQL(QString dbPath, QString request)
     QSqlDatabase::removeDatabase(QSqlDatabase::database().connectionName());
     qDebug() << "AfterDelete" << QSqlDatabase::database().connectionNames();
 
-    return query;
+    return response;
 }

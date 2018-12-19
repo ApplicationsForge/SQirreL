@@ -39,16 +39,16 @@ void Repository::setDatabaseType(Repository::DB_TYPE type)
     m_currentAdapter = type;
 }
 
-QSqlQuery Repository::executeSQL(QString request)
+QList<QSqlRecord> Repository::executeSQL(QString request)
 {
-    QSqlQuery result;
+    QList<QSqlRecord> result;
     switch (m_currentAdapter) {
     case DB_TYPE::SQLite:
     {
         try
         {
             SQLiteAdapter adapter(this);
-            result = adapter.runSQL(m_databasePath, request);
+            result = adapter.executeSQL(m_databasePath, request);
         }
         catch(std::runtime_error e)
         {

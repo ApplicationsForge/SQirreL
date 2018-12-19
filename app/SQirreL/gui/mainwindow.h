@@ -22,11 +22,11 @@ public:
 private slots:
     void on_actionTemplates_triggered();
 
-    void on_actionOpenLocalSQLiteDatabase_triggered();
-
     void on_runToolButton_clicked();
 
     void on_clearToolButton_clicked();
+
+    void on_openLocalDatabaseToolButton_clicked();
 
 private:
     Ui::MainWindow *ui;

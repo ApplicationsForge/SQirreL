@@ -32,7 +32,7 @@ private:
     DB_TYPE m_currentAdapter;
     QString m_databasePath;
 
-    QSqlQuery executeSQL(QString request);
+    QList<QSqlRecord> executeSQL(QString request);
 
     friend class Router;
 
