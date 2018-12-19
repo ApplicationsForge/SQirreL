@@ -46,11 +46,38 @@ void MainWindow::on_actionTemplates_triggered()
 
 void MainWindow::on_runToolButton_clicked()
 {
+    ui->responseTableWidget->clear();
+    ui->responseTableWidget->setColumnCount(0);
+    ui->responseTableWidget->setRowCount(0);
+
     Router& router = Router::getInstance();
     QString request = ui->requestTextEdit->toPlainText();
     QList<QSqlRecord> response = router.executeSQL(request);
 
-    qDebug() << response;
+    if(response.isEmpty())
+    {
+        return;
+    }
+
+    ui->responseTableWidget->setRowCount(response.length());
+    QSqlRecord firstRecord = response.first();
+    ui->responseTableWidget->setColumnCount(firstRecord.count());
+    for(int columnIndex = 0; columnIndex < firstRecord.count(); columnIndex++)
+    {
+        ui->responseTableWidget->setHorizontalHeaderItem(columnIndex, new QTableWidgetItem(firstRecord.fieldName(columnIndex)));
+    }
+
+
+    int currentRow = 0;
+    for(auto record : response)
+    {
+        for(int columnIndex = 0; columnIndex < record.count(); columnIndex++)
+        {
+            ui->responseTableWidget->setItem(currentRow, columnIndex, new QTableWidgetItem(record.value(columnIndex).toString()));
+        }
+        currentRow++;
+    }
+
 
     ui->dbLineEdit->setText(router.getRepository()->getDBPath());
 
