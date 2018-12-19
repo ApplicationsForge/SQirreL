@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,7 +31,8 @@ SOURCES += \
     models/router.cpp \
     gui/widgets/sql_editor_widget.cpp \
     gui/sql_syntax_highlighter.cpp \
-    libs/json_parser/json.cpp
+    libs/json_parser/json.cpp \
+    models/types/db_adapters/sqlite_adapter.cpp
 
 HEADERS += \
         gui/mainwindow.h \
@@ -39,7 +40,8 @@ HEADERS += \
     models/router.h \
     gui/widgets/sql_editor_widget.h \
     gui/sql_syntax_highlighter.h \
-    libs/json_parser/json.h
+    libs/json_parser/json.h \
+    models/types/db_adapters/sqlite_adapter.h
 
 FORMS += \
         gui/mainwindow.ui

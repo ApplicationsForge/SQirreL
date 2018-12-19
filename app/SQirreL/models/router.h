@@ -16,6 +16,9 @@ public:
 
      Repository* getRepository();
 
+     bool openDB(QString path, Repository::DB_TYPE type);
+     QSqlQuery runSQL(QString request);
+
 private:
     explicit Router(QObject *parent = nullptr);
 

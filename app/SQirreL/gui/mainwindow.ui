@@ -46,7 +46,7 @@
         <number>12</number>
        </property>
        <item>
-        <widget class="SqlEditorWidget" name="requestPlainTextEdit">
+        <widget class="SqlEditorWidget" name="requestTextEdit">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
@@ -188,6 +188,9 @@
    <property name="features">
     <set>QDockWidget::DockWidgetClosable</set>
    </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea</set>
+   </property>
    <property name="windowTitle">
     <string>Templates</string>
    </property>
@@ -259,6 +262,11 @@
   <action name="actionTemplates">
    <property name="text">
     <string>Templates</string>
+   </property>
+  </action>
+  <action name="actionOpenLocalSQLiteDatabase">
+   <property name="text">
+    <string>Open Local SQLite Database</string>
    </property>
   </action>
  </widget>

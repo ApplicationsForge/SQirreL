@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
 
 #include "models/router.h"
 #include "gui/sql_syntax_highlighter.h"
@@ -20,6 +21,12 @@ public:
 
 private slots:
     void on_actionTemplates_triggered();
+
+    void on_actionOpenLocalSQLiteDatabase_triggered();
+
+    void on_runToolButton_clicked();
+
+    void on_clearToolButton_clicked();
 
 private:
     Ui::MainWindow *ui;
