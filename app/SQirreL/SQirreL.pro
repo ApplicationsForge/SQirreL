@@ -36,7 +36,10 @@ SOURCES += \
     models/types/collection.cpp \
     models/types/collection_item.cpp \
     models/utils/file_reader.cpp \
-    models/services/open_collection_interactor.cpp
+    models/services/open_collection_interactor.cpp \
+    models/services/save_to_file_interactor.cpp \
+    models/services/collection_to_string_interactor.cpp \
+    models/services/collection_from_string_interactor.cpp
 
 HEADERS += \
         gui/mainwindow.h \
@@ -49,7 +52,10 @@ HEADERS += \
     models/types/collection.h \
     models/types/collection_item.h \
     models/utils/file_reader.h \
-    models/services/open_collection_interactor.h
+    models/services/open_collection_interactor.h \
+    models/services/save_to_file_interactor.h \
+    models/services/collection_to_string_interactor.h \
+    models/services/collection_from_string_interactor.h
 
 FORMS += \
         gui/mainwindow.ui

@@ -16,6 +16,9 @@ public:
     QList<CollectionItem> items() const;
     void setItems(const QList<CollectionItem> &items);
 
+    void addItem(CollectionItem item);
+    void removeItem(QString itemName);
+
 private:
     QString m_name;
     QList<CollectionItem> m_items;

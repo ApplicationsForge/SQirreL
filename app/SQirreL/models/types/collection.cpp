@@ -26,3 +26,21 @@ void Collection::setItems(const QList<CollectionItem> &items)
 {
     m_items = items;
 }
+
+void Collection::addItem(CollectionItem item)
+{
+    m_items.append(item);
+}
+
+void Collection::removeItem(QString itemName)
+{
+    QList<CollectionItem> tmp;
+    for(auto item : m_items)
+    {
+        if(item.requestName() != itemName)
+        {
+            tmp.append(item);
+        }
+    }
+    this->setItems(tmp);
+}

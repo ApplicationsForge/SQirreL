@@ -7,6 +7,7 @@
 #include "models/types/db_adapters/sqlite_adapter.h"
 #include "models/types/collection.h"
 #include "models/services/open_collection_interactor.h"
+#include "models/services/collection_from_string_interactor.h"
 
 // Router& router = Router::getInstance();
 

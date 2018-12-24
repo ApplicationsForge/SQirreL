@@ -119,7 +119,7 @@ void MainWindow::on_clearToolButton_clicked()
 
 void MainWindow::on_openLocalDatabaseToolButton_clicked()
 {
-    QString path = QFileDialog::getOpenFileName(nullptr, "Выберите файл базы данных", "", "*.db");
+    QString path = QFileDialog::getOpenFileName(nullptr, "Выберите файл", "", "*.db");
     Router& router = Router::getInstance();
     router.setDatabase(path, Repository::DB_TYPE::SQLite);
     ui->dbLineEdit->setText(router.getRepository()->getDBPath());
@@ -127,7 +127,7 @@ void MainWindow::on_openLocalDatabaseToolButton_clicked()
 
 void MainWindow::on_openTemplateCollectionToolButton_clicked()
 {
-    QString path = QFileDialog::getOpenFileName(nullptr, "Выберите файл базы данных", "", "*.json");
+    QString path = QFileDialog::getOpenFileName(nullptr, "Выберите файл", "", "*.json");
     if(path.isEmpty())
     {
         return;
@@ -136,4 +136,12 @@ void MainWindow::on_openTemplateCollectionToolButton_clicked()
 
     Router& router = Router::getInstance();
     router.getRepository()->setCurrentCollectionPath(path);
+}
+
+void MainWindow::on_saveToolButton_clicked()
+{
+    QString content = ui->requestTextEdit->toPlainText();
+
+    Router& router = Router::getInstance();
+    router.getRepository()->addItem(CollectionItem("test", content));
 }

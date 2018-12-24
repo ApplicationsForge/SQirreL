@@ -47,11 +47,10 @@ void Router::onRepository_CurrentCollectionPathUpdated(QString path)
 
 void Router::onOpenCollectionInteractor_FileLoaded(QString content)
 {
-    // parse content to collection
+    CollectionFromStringInteractor parser;
+    Collection collection = parser.execute(content);
 
-    qDebug() << content;
-
-    m_repository.data()->setCurrentCollection(Collection("Mock"));
+    m_repository.data()->setCurrentCollection(collection);
     emit currentCollectionUpdated(m_repository->getCurrentCollection());
 }
 

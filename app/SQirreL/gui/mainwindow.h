@@ -32,6 +32,8 @@ private slots:
 
     void on_openTemplateCollectionToolButton_clicked();
 
+    void on_saveToolButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

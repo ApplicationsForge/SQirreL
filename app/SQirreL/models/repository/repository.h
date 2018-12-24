@@ -5,6 +5,8 @@
 #include <QMessageBox>
 
 #include "models/types/collection.h"
+#include "models/services/save_to_file_interactor.h"
+#include "models/services/collection_to_string_interactor.h"
 
 class Router;
 
@@ -28,6 +30,9 @@ public:
 
     Collection getCurrentCollection() const;
     void setCurrentCollection(const Collection &currentCollection);
+
+    void addItem(CollectionItem item);
+    void removeItem(QString itemName);
 
 private:
     DB_TYPE m_currentAdapter;

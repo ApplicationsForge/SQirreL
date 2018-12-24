@@ -53,3 +53,25 @@ void Repository::setCurrentCollection(const Collection &currentCollection)
 {
     m_currentCollection = currentCollection;
 }
+
+void Repository::addItem(CollectionItem item)
+{
+    m_currentCollection.addItem(item);
+
+    SaveToFileInteractor saveToFile;
+    CollectionToStringInteractor convertToString;
+    saveToFile.execute(m_currentCollectionPath, convertToString.execute(m_currentCollection));
+
+    emit currentCollectionPathUpdated(m_currentCollectionPath);
+}
+
+void Repository::removeItem(QString itemName)
+{
+    m_currentCollection.removeItem(itemName);
+
+    SaveToFileInteractor saveToFile;
+    CollectionToStringInteractor convertToString;
+    saveToFile.execute(m_currentCollectionPath, convertToString.execute(m_currentCollection));
+
+    emit currentCollectionPathUpdated(m_currentCollectionPath);
+}
