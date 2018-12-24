@@ -32,7 +32,11 @@ SOURCES += \
     gui/widgets/sql_editor_widget.cpp \
     gui/sql_syntax_highlighter.cpp \
     libs/json_parser/json.cpp \
-    models/types/db_adapters/sqlite_adapter.cpp
+    models/types/db_adapters/sqlite_adapter.cpp \
+    models/types/collection.cpp \
+    models/types/collection_item.cpp \
+    models/utils/file_reader.cpp \
+    models/services/open_collection_interactor.cpp
 
 HEADERS += \
         gui/mainwindow.h \
@@ -41,7 +45,11 @@ HEADERS += \
     gui/widgets/sql_editor_widget.h \
     gui/sql_syntax_highlighter.h \
     libs/json_parser/json.h \
-    models/types/db_adapters/sqlite_adapter.h
+    models/types/db_adapters/sqlite_adapter.h \
+    models/types/collection.h \
+    models/types/collection_item.h \
+    models/utils/file_reader.h \
+    models/services/open_collection_interactor.h
 
 FORMS += \
         gui/mainwindow.ui

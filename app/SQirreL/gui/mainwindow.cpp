@@ -25,11 +25,39 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->label->setText(router.getRepository()->helloString());
 
     this->showMaximized();
+
+    this->setupConnections();
 }
 
 MainWindow::~MainWindow()
 {
+    this->resetConnections();
     delete ui;
+}
+
+void MainWindow::setupConnections()
+{
+    Router& router = Router::getInstance();
+    QObject::connect(&router, SIGNAL(currentCollectionUpdated(Collection)), this, SLOT(onRouter_CurrentCollectionUpdated(Collection)));
+}
+
+void MainWindow::resetConnections()
+{Router& router = Router::getInstance();
+    QObject::disconnect(&router, SIGNAL(currentCollectionUpdated(Collection)), this, SLOT(onRouter_CurrentCollectionUpdated(Collection)));
+
+}
+
+void MainWindow::onRouter_CurrentCollectionUpdated(Collection collection)
+{
+    ui->collectionItemsListWidget->clear();
+    ui->collectionNameLabel->setText(collection.name());
+
+    QList<CollectionItem> items = collection.items();
+
+    for(auto item : items)
+    {
+        ui->collectionItemsListWidget->addItem(item.requestName());
+    }
 }
 
 void MainWindow::on_actionTemplates_triggered()
@@ -95,4 +123,17 @@ void MainWindow::on_openLocalDatabaseToolButton_clicked()
     Router& router = Router::getInstance();
     router.setDatabase(path, Repository::DB_TYPE::SQLite);
     ui->dbLineEdit->setText(router.getRepository()->getDBPath());
+}
+
+void MainWindow::on_openTemplateCollectionToolButton_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(nullptr, "Выберите файл базы данных", "", "*.json");
+    if(path.isEmpty())
+    {
+        return;
+    }
+
+
+    Router& router = Router::getInstance();
+    router.getRepository()->setCurrentCollectionPath(path);
 }

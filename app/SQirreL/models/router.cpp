@@ -2,7 +2,8 @@
 
 Router::Router(QObject *parent) :
     QObject(parent),
-    m_repository(new Repository(this))
+    m_repository(new Repository(this)),
+    m_openCollection(new OpenCollectionInteractor(this))
 {
     setupConnections();
 }
@@ -29,12 +30,29 @@ Repository *Router::getRepository()
 
 void Router::setupConnections()
 {
-
+    QObject::connect(m_repository.data(), SIGNAL(currentCollectionPathUpdated(QString)), this, SLOT(onRepository_CurrentCollectionPathUpdated(QString)));
+    QObject::connect(m_openCollection.data(), SIGNAL(fileLoaded(QString)), this, SLOT(onOpenCollectionInteractor_FileLoaded(QString)));
 }
 
 void Router::resetConnections()
 {
+    QObject::disconnect(m_repository.data(), SIGNAL(currentCollectionPathUpdated(QString)), this, SLOT(onRepository_CurrentCollectionPathUpdated(QString)));
+    QObject::disconnect(m_openCollection.data(), SIGNAL(fileLoaded(QString)), this, SLOT(onOpenCollectionInteractor_FileLoaded(QString)));
+}
 
+void Router::onRepository_CurrentCollectionPathUpdated(QString path)
+{
+    m_openCollection.data()->execute(path);
+}
+
+void Router::onOpenCollectionInteractor_FileLoaded(QString content)
+{
+    // parse content to collection
+
+    qDebug() << content;
+
+    m_repository.data()->setCurrentCollection(Collection("Mock"));
+    emit currentCollectionUpdated(m_repository->getCurrentCollection());
 }
 
 void Router::setDatabase(QString path, Repository::DB_TYPE type)

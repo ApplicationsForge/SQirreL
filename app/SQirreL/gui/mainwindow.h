@@ -20,6 +20,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void onRouter_CurrentCollectionUpdated(Collection collection);
+
     void on_actionTemplates_triggered();
 
     void on_runToolButton_clicked();
@@ -28,11 +30,16 @@ private slots:
 
     void on_openLocalDatabaseToolButton_clicked();
 
+    void on_openTemplateCollectionToolButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     /// Подсветки синтаксиса в редакторе SQL
     QScopedPointer<SqlSyntaxHighlighter> m_hightlighter;
+
+    void setupConnections();
+    void resetConnections();
 };
 
 #endif // MAINWINDOW_H
