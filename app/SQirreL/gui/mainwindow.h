@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QListWidgetItem>
 
 #include "models/router.h"
 #include "gui/sql_syntax_highlighter.h"
@@ -33,6 +34,8 @@ private slots:
     void on_openTemplateCollectionToolButton_clicked();
 
     void on_saveToolButton_clicked();
+
+    void on_collectionItemsListWidget_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

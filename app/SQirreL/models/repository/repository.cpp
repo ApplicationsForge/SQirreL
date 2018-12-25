@@ -75,3 +75,8 @@ void Repository::removeItem(QString itemName)
 
     emit currentCollectionPathUpdated(m_currentCollectionPath);
 }
+
+QString Repository::getRequestContent(QString itemName)
+{
+    return m_currentCollection.getRequestContent(itemName);
+}

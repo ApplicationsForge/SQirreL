@@ -145,3 +145,13 @@ void MainWindow::on_saveToolButton_clicked()
     Router& router = Router::getInstance();
     router.getRepository()->addItem(CollectionItem("test", content));
 }
+
+void MainWindow::on_collectionItemsListWidget_itemClicked(QListWidgetItem *item)
+{
+    QString requestTitle = item->text();
+
+    Router& router = Router::getInstance();
+    QString requestContent = router.getRepository()->getRequestContent(requestTitle);
+
+    ui-> requestTextEdit->setPlainText(requestContent);
+}

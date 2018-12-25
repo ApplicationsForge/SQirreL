@@ -290,6 +290,13 @@
          <number>0</number>
         </property>
         <item>
+         <widget class="QToolButton" name="newCollectionToolButton">
+          <property name="text">
+           <string>New Collection</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QToolButton" name="openTemplateCollectionToolButton">
           <property name="text">
            <string>Open Collection</string>
@@ -322,7 +329,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Collection Name</string>
+        <string>No collection is open</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

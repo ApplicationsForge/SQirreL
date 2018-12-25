@@ -44,3 +44,17 @@ void Collection::removeItem(QString itemName)
     }
     this->setItems(tmp);
 }
+
+QString Collection::getRequestContent(QString itemName)
+{
+    QString result = "";
+    for(auto item : m_items)
+    {
+        if(item.requestName() == itemName)
+        {
+            result = item.requestContent();
+            break;
+        }
+    }
+    return result;
+}

@@ -19,6 +19,8 @@ public:
     void addItem(CollectionItem item);
     void removeItem(QString itemName);
 
+    QString getRequestContent(QString itemName);
+
 private:
     QString m_name;
     QList<CollectionItem> m_items;

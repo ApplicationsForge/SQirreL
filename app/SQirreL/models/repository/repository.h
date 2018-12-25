@@ -33,6 +33,7 @@ public:
 
     void addItem(CollectionItem item);
     void removeItem(QString itemName);
+    QString getRequestContent(QString itemName);
 
 private:
     DB_TYPE m_currentAdapter;
