@@ -45,6 +45,8 @@ private:
 
     void setupConnections();
     void resetConnections();
+
+    void hideWidgets();
 };
 
 #endif // MAINWINDOW_H

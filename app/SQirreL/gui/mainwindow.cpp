@@ -27,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->showMaximized();
 
     this->setupConnections();
+
+    this->hideWidgets();
 }
 
 MainWindow::~MainWindow()
@@ -45,6 +47,12 @@ void MainWindow::resetConnections()
 {Router& router = Router::getInstance();
     QObject::disconnect(&router, SIGNAL(currentCollectionUpdated(Collection)), this, SLOT(onRouter_CurrentCollectionUpdated(Collection)));
 
+}
+
+void MainWindow::hideWidgets()
+{
+    ui->mainToolBar->hide();
+    ui->saveToolButton->hide();
 }
 
 void MainWindow::onRouter_CurrentCollectionUpdated(Collection collection)
@@ -140,10 +148,10 @@ void MainWindow::on_openTemplateCollectionToolButton_clicked()
 
 void MainWindow::on_saveToolButton_clicked()
 {
-    QString content = ui->requestTextEdit->toPlainText();
+    /*QString content = ui->requestTextEdit->toPlainText();
 
     Router& router = Router::getInstance();
-    router.getRepository()->addItem(CollectionItem("test", content));
+    router.getRepository()->addItem(CollectionItem("test", content));*/
 }
 
 void MainWindow::on_collectionItemsListWidget_itemClicked(QListWidgetItem *item)
