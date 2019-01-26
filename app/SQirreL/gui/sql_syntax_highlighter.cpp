@@ -18,25 +18,63 @@ void SqlSyntaxHighlighter::setPattern()
 {
     keywordPattern =
     {
+        "CREATE",
+        "DROP",
+        "ALTER",
         "SELECT",
+        "INSERT",
         "UPDATE",
         "DELETE",
-        "INSERT INTO",
-        "CREATE DATABASE",
-        "ALTER DATABASE",
-        "CREATE TABLE",
-        "ALTER TABLE",
-        "DROP TABLE",
-        "CREATE INDEX",
-        "DROP INDEX"
+        "COMMIT",
+        "ROLLBACK"
+        "INSERT",
+        "INTO"
+        "SET",
+        "GRANT",
+        "REVOKE",
+        ";",
+        "DISTINCT",
+        "FROM",
+        "JOIN",
+        "ON",
+        "WHERE",
+        "GROUP BY",
+        "HAVING",
+        "ORDER BY",
+        "LEFT",
+        "RIGHT",
+        "FULL",
+        "CROSS",
+        "AND",
+        "OR",
+        "IS",
+        "IN",
+        "NOT",
+        "BETWEEN",
+        "LIKE",
+        "ASK",
+        "DESC",
+        "COUNT",
+        "MAX",
+        "MIN",
+        "ADD"
     };
 
     argumentsPattern =
     {
-        "FROM",
-        "LEFT",
-        "RIGHT",
-        "JOIN"
+        "DATABASE",
+        "TABLE",
+        "DOMAIN",
+        "INDEX",
+        "VIEW",
+        "TRANSACTION",
+        "NULL",
+        "PRIMARY KEY",
+        "FOREIGN KEY",
+        "REFERENCES",
+        "DEFAULT",
+        "COLUMN",
+        "CONSTRAINT"
     };
 
     commentsPattern =
