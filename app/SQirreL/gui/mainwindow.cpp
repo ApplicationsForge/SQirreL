@@ -11,12 +11,10 @@ MainWindow::MainWindow(QWidget *parent) :
     auto toolbar = ui->mainToolBar;
     toolbar->addAction(ui->actionTemplates);
 
-    ui->templatesDockWidget->hide();
-
     // установка оформления statusBar
     ui->statusBar->setStyleSheet("background-color: #333; color: #33bb33");
     ui->statusBar->setFont(QFont("Consolas", 14));
-    ui->statusBar->showMessage(tr("State: ready 0123456789"));
+    ui->statusBar->showMessage(tr("Ready"));
 
     m_hightlighter->setDocument(ui->requestTextEdit->document());
     m_hightlighter->setPattern();
@@ -44,15 +42,16 @@ void MainWindow::setupConnections()
 }
 
 void MainWindow::resetConnections()
-{Router& router = Router::getInstance();
+{
+    Router& router = Router::getInstance();
     QObject::disconnect(&router, SIGNAL(currentCollectionUpdated(Collection)), this, SLOT(onRouter_CurrentCollectionUpdated(Collection)));
-
 }
 
 void MainWindow::hideWidgets()
 {
     ui->mainToolBar->hide();
     ui->saveToolButton->hide();
+    ui->templatesDockWidget->hide();
 }
 
 void MainWindow::onRouter_CurrentCollectionUpdated(Collection collection)
